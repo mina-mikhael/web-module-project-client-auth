@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Login from "./components/Login";
 import FriendList from "./components/FriendList";
 import AddFriends from "./components/AddFriends";
 import Logout from "./components/logout";
+import PrivateRoute from "./components/PrivateRoute";
 
 import { BrowserRouter as Router, Route, NavLink, Redirect } from "react-router-dom";
-
-const isLoggedin = window.localStorage.getItem("isLogged");
 
 function App() {
   return (
@@ -28,15 +27,10 @@ function App() {
       <Route exact path="/Login">
         <Redirect to={"/"} />
       </Route>
-      <Route exact path="/friends">
-        <FriendList />
-      </Route>
-      <Route exact path="/friends/add">
-        <AddFriends />
-      </Route>
-      <Route exact path="/logout">
-        <Logout />
-      </Route>
+
+      <PrivateRoute exact path="/friends" component={FriendList} />
+      <PrivateRoute exact path="/friends/add" component={AddFriends} />
+      <PrivateRoute exact path="/logout" component={Logout} />
     </Router>
   );
 }

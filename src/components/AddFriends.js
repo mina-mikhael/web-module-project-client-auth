@@ -26,6 +26,7 @@ const AddFriends = () => {
         },
       })
       .then((res) => {
+        console.log(res);
         push("/friends");
       })
       .catch((err) => {
